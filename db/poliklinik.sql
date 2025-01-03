@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Des 2024 pada 13.26
+-- Waktu pembuatan: 03 Jan 2025 pada 17.38
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 8.0.11
 
@@ -190,7 +190,6 @@ CREATE TABLE `pasien` (
 
 INSERT INTO `pasien` (`id`, `nama`, `alamat`, `no_ktp`, `no_hp`, `no_rm`, `password`, `role`) VALUES
 (5, 'alex', 'jl.mawar', '33240908070003', '087755674447', '082412-002', 'e10adc3949ba59abbe56e057f20f883e', 'pasien'),
-(7, 'akil', 'jl. melati', '3374110989070001', '082881467889', '082412-004', 'e10adc3949ba59abbe56e057f20f883e', 'pasien'),
 (18, 'alaya', 'jl. melati', '3374023109990005', '0858885113445', '202412-003', 'e10adc3949ba59abbe56e057f20f883e', 'pasien'),
 (19, 'alfi', 'jl.jambu', '3374052902270001', '0878816565113', '202412-004', 'b8aab85cb5b70a866972a694a27b7ed6', 'pasien'),
 (20, 'faris', 'jl.melanding', '3374050813040001', '0856446766886', '202412-005', '7d77e825b80cff62a72e680c1c81424f', 'pasien'),
@@ -212,22 +211,23 @@ CREATE TABLE `periksa` (
   `id_daftar_poli` int(11) NOT NULL,
   `tgl_periksa` datetime NOT NULL,
   `catatan` text NOT NULL,
-  `biaya_periksa` int(11) DEFAULT NULL
+  `biaya_periksa` int(11) DEFAULT NULL,
+  `status_pembayaran` enum('Lunas','Belum Bayar') DEFAULT 'Belum Bayar'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `periksa`
 --
 
-INSERT INTO `periksa` (`id`, `id_daftar_poli`, `tgl_periksa`, `catatan`, `biaya_periksa`) VALUES
-(4, 1, '2024-12-25 00:00:00', 'tidur banyak', 300000),
-(5, 2, '2024-12-25 20:11:00', 'istirahat', 270000),
-(6, 4, '2024-12-26 01:47:00', 'perbanyak minum', 270000),
-(7, 3, '2024-12-25 01:53:00', 'tes', 300000),
-(8, 6, '2024-12-25 06:57:00', 'diminum tiap hari', 270000),
-(9, 11, '2024-12-30 13:52:00', 'perbanyak istirahat', 420000),
-(10, 7, '2024-12-30 15:04:00', 'istirahat\r\n', 200000),
-(11, 12, '2024-12-30 18:44:00', 'jangan kecapekan', 200000);
+INSERT INTO `periksa` (`id`, `id_daftar_poli`, `tgl_periksa`, `catatan`, `biaya_periksa`, `status_pembayaran`) VALUES
+(4, 1, '2024-12-25 00:00:00', 'tidur banyak', 300000, 'Belum Bayar'),
+(5, 2, '2024-12-25 20:11:00', 'istirahat', 270000, 'Belum Bayar'),
+(6, 4, '2024-12-26 01:47:00', 'perbanyak minum', 270000, 'Belum Bayar'),
+(7, 3, '2024-12-25 01:53:00', 'tes', 300000, 'Belum Bayar'),
+(8, 6, '2024-12-25 06:57:00', 'diminum tiap hari', 270000, 'Belum Bayar'),
+(9, 11, '2024-12-30 13:52:00', 'perbanyak istirahat', 420000, 'Belum Bayar'),
+(10, 7, '2024-12-30 15:04:00', 'istirahat\r\n', 200000, 'Belum Bayar'),
+(11, 12, '2024-12-30 18:44:00', 'jangan kecapekan', 200000, 'Belum Bayar');
 
 -- --------------------------------------------------------
 
