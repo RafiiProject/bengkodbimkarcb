@@ -165,7 +165,13 @@
                                                 </div>
                                             </div>
                                         <?php } ?>
-                                        <a href="page/periksaPasien/cetakStruk.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-primary">Cetak Struk</a>
+                                        <td>
+                                            <?php if ($data['status_periksa'] == 1) { ?>
+                                                <a href="cetakStruk.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-primary">Cetak Struk</a>
+                                            <?php } else { ?>
+                                                <button class="btn btn-sm btn-primary" disabled>Cetak Struk</button>
+                                            <?php } ?>
+                                        </td>
                                     </td>
                                 </tr>
                                 <?php } ?>

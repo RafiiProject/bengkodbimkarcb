@@ -1,8 +1,8 @@
 <?php
 require 'koneksi.php';
 
-// Ambil ID dari parameter URL
-$id = $_GET['id'];
+// Ambil ID dari parameter URL dan sanitasi input
+$id = isset($_GET['id']) ? mysqli_real_escape_string($mysqli, $_GET['id']) : '';
 
 // Query untuk mengambil detail periksa
 $ambilDetail = mysqli_query($mysqli, "
@@ -15,6 +15,7 @@ $ambilDetail = mysqli_query($mysqli, "
         DATE_FORMAT(jadwal_periksa.jam_mulai, '%H:%i') AS jamMulai,
         DATE_FORMAT(jadwal_periksa.jam_selesai, '%H:%i') AS jamSelesai,
         daftar_poli.no_antrian,
+        daftar_poli.status_periksa,
         p.id AS idPeriksa,
         p.tgl_periksa,
         p.catatan,
@@ -86,6 +87,13 @@ if (!$data) {
                                     style="height: 60px; width: 60px; background-color: #0284c7; color: white; padding-top: 6px;">
                                     <h1><?php echo htmlspecialchars($data['no_antrian']); ?></h1>
                                 </div>
+                            </div>
+                            <div>
+                                <?php if ($data['status_periksa'] == 1) { ?>
+                                    <a href="cetakStruk.php?id=<?php echo htmlspecialchars($data['idDaftarPoli']); ?>" class="btn btn-sm btn-primary">Cetak Struk</a>
+                                <?php } else { ?>
+                                    <button class="btn btn-sm btn-primary" disabled>Cetak Struk</button>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

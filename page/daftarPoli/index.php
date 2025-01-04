@@ -79,6 +79,7 @@
                                 <th>Mulai</th>
                                 <th>Selesai</th>
                                 <th>Antrian</th>
+                                <th>Status Periksa</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -88,7 +89,7 @@
                             <?php
                             require 'koneksi.php';
                             $no = 1;
-                            $query = "SELECT daftar_poli.id as idDaftarPoli, poli.nama_poli, dokter.nama, jadwal_periksa.hari, jadwal_periksa.jam_mulai, jadwal_periksa.jam_selesai, daftar_poli.no_antrian FROM daftar_poli INNER JOIN jadwal_periksa ON daftar_poli.id_jadwal = jadwal_periksa.id INNER JOIN dokter ON jadwal_periksa.id_dokter = dokter.id INNER JOIN poli ON dokter.id_poli = poli.id WHERE daftar_poli.id_pasien = '$idPasien'";
+                            $query = "SELECT daftar_poli.id as idDaftarPoli, poli.nama_poli, dokter.nama, jadwal_periksa.hari, jadwal_periksa.jam_mulai, jadwal_periksa.jam_selesai, daftar_poli.no_antrian, daftar_poli.status_periksa FROM daftar_poli INNER JOIN jadwal_periksa ON daftar_poli.id_jadwal = jadwal_periksa.id INNER JOIN dokter ON jadwal_periksa.id_dokter = dokter.id INNER JOIN poli ON dokter.id_poli = poli.id WHERE daftar_poli.id_pasien = '$idPasien'";
                             $result = mysqli_query($mysqli, $query);
 
                             while ($data = mysqli_fetch_assoc($result)) {
@@ -102,6 +103,13 @@
                                 <td><?php echo $data['jam_mulai'] ?></td>
                                 <td><?php echo $data['jam_selesai'] ?></td>
                                 <td><?php echo $data['no_antrian'] ?></td>
+                                <td>
+                                    <?php if ($data['status_periksa'] == 1) { ?>
+                                    <span class="badge badge-success">Sudah Diperiksa</span>
+                                    <?php } else { ?>
+                                    <span class="badge badge-warning">Belum Diperiksa</span>
+                                    <?php } ?>
+                                </td>
                                 <td>
                                     <a href="detailDaftarPoli.php?id=<?php echo $data['idDaftarPoli'] ?>"
                                         class='btn btn-sm btn-success edit-btn'>Detail</a>

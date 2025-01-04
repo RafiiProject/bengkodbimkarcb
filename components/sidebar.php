@@ -84,6 +84,12 @@
                                     <p>Pasien <span class="right badge badge-danger">Admin</span></p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="pembayaranPasien.php" class="nav-link">
+                                    <i class="fas fa-book-medical nav-icon"></i>
+                                    <p>Pembayaran Pasien <span class="right badge badge-danger">Admin</span></p>
+                                </a>
+                            </li>
                         </ul>
                     <?php } 
                     else if ($role === "dokter") { ?>
